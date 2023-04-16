@@ -1,35 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      body {
-        margin: 40px auto;
-        max-width: 650px;
-        line-height: 1.6;
-        font-size: 18px;
-        font-family: "Courier New", Courier, monospace;
-        color: #444;
-        padding: 0 10px;
-      }
-      h2 {
-        line-height: 1.2;
-      }
-    </style>
-  </head>
+<html>
+<head>
+  <title>BUILD BEATS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
 
-  <body>
-    <h2>HTTP Video Streaming</h2>
-    <p>This video is 61MB and is being streamed instead of downloaded.</p>
-    <p>
-      Feel free to seek through the video and it only loads the part you want to
-      watch
-    </p>
-    <video id="videoPlayer" width="650" controls muted="muted" autoplay>
+    .video-container {
+      max-width: 800px;
+      width: 90vw;
+      height: 0;
+      padding-bottom: 56.25%;
+      position: relative;
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .control-btn {
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      background-size: cover;
+      margin: 0 0.5rem;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .control-btn:hover {
+      opacity: 1;
+    }
+
+    .play-pause-btn {
+      background-image: url('play.gif');
+    }
+
+    .play-pause-btn.pause {
+      background-image: url('pause.png');
+    }
+
+    .mute-unmute-btn {
+      background-image: url('mute.png');
+    }
+
+    .mute-unmute-btn.mute {
+      background-image: url('mute.png');
+    }
+
+    .text-container {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="video-container">
+    <video id="videoPlayer" controls muted="muted" autoplay>
       <source src="/video" type="video/mp4" />
     </video>
-    <i>Big Buck Bunny</i>
-  </body>
+  </div>
+  <div class="controls">
+    <div class="control-btn play-pause-btn" id="playPauseBtn"></div>
+    <div class="control-btn mute-unmute-btn" id="muteUnmuteBtn"></div>
+  </div>
+  <div class="text-container">
+    <h2>BUILD BEATS</h2>
+    <p> BEATS 2 BUILD 2<P>
+    </P>24 / 7 LIVE STREAM</p>
+    <p> BEATS BUILT 4 BUILDERS BY BUILDERS </p>
+  </div>
+
+  <script>
+    const videoPlayer = document.getElementById('videoPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const muteUnmuteBtn = document.getElementById('muteUnmuteBtn');
+
+    // Play/Pause and Mute/Unmute button click event
+    playPauseBtn.addEventListener('click', () => {
+      if (videoPlayer.paused) {
+        videoPlayer.play();
+      } else {
+        videoPlayer.pause();
+      }
+      playPauseBtn.classList.toggle('pause');
+    });
+
+    muteUnmuteBtn.addEventListener('click', () => {
+      videoPlayer.muted = !videoPlayer.muted;
+      muteUnmuteBtn.classList.toggle('mute');
+    });
+  </script>
+</body>
 </html>
